@@ -9,7 +9,7 @@
 ## Getting Started
 Clone this repository
 ```
-$ git clone git@github.com:ex-git/react-native-boilerplate-expo-redux.git projectX
+$ git clone https://github.com/ex-git/react-native-boilerplate-expo-redux.git projectX
 ```
 Install node modules, [Yarn](https://yarnpkg.com/en/) is highly recommended.
 ```
