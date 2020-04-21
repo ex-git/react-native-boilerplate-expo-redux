@@ -72,6 +72,8 @@ const Signup = () => {
   const dispatch = useDispatch();
   const [value, onChangeText] = React.useState('Useless Placeholder');
   const [submitting, setSubmitting] = useState(false);
+  const [password1, setPassword1] = useState();
+  const [password2, setPassword2] = useState();
   const [userInfo, setUserInfo] = useState({});
   const [showStrongPasswordHint, setShowStrongPasswordHint] = useState(false);
   const [passwordErrorMsg1, setPasswordErrorMsg1] = useState();
@@ -83,7 +85,7 @@ const Signup = () => {
     setSubmitting(true);
   };
   const strongPasswordHint = [
-    'A strong password example:',
+    'A strong password should have:',
     '  - at least 8 digits',
     '  - at least 1 number (0-9)',
     '  - at least 1 upper case letter (A-Z)',
@@ -91,8 +93,10 @@ const Signup = () => {
     '  - at least 1 symbol (eg. #?!@$%^&*-)',
   ];
   const handleInput = (name, text) => {
+    let error = false;
     if (name === 'password1') {
       let msg;
+      let strongPassword = false;
       if (text === '') {
         msg = "Password can't be empty";
       } else if (!stringFormatter(text) || text.includes(' ')) {
@@ -107,29 +111,36 @@ const Signup = () => {
         || (stringFormatter(text) && !/[#?!@$%^&*-]+/.test(stringFormatter(text)))) {
         setShowStrongPasswordHint(true);
       } else {
+        strongPassword = true;
         setShowStrongPasswordHint(false);
       }
       if (msg) {
+        error = true;
         setPasswordErrorMsg1(msg);
         setPasswordErrorStyle1('red');
+      } else if (strongPassword) {
+        setPasswordErrorMsg1('This is a strong password!');
+        setPasswordErrorStyle1('green');
       } else {
         setPasswordErrorMsg1(null);
-        setPasswordErrorStyle1('green');
+      }
+      setPassword1(text);
+      if (password2 && password2 !== text) {
+        setPasswordErrorMsg2('Password does not match');
+      } else {
+        setPasswordErrorMsg2(null);
       }
     }
-    // setUserInfo((preValue) => {
-    //   const newValue = { ...preValue };
-    //   newValue[name] = text;
-    //   return newValue;
-    // });
-  };
-
-  useEffect(() => {
-    const { password1 = null, password2 = null } = userInfo;
-    if (password1 && password2) {
-      setPasswordError(password1 !== password2);
+    if (name === 'password2') {
+      if (password1 && password1 !== text) {
+        error = true;
+        setPasswordErrorMsg2('Password does not match');
+      } else {
+        setPasswordErrorMsg2(null);
+      }
+      setPassword2(text);
     }
-  }, [userInfo]);
+  };
 
   return (
     <View style={styles.container}>
@@ -209,8 +220,8 @@ const Signup = () => {
               label="Confirm your password"
               placeholder=""
               onChangeText={(text) => handleInput('password2', text)}
-              // errorStyle={{ color: 'red' }}
-              // errorMessage={passwordError ? 'Both passwords \nmust match' : ''}
+              errorStyle={{ color: 'red' }}
+              errorMessage={passwordErrorMsg2 || ''}
               inputContainerStyle={styles.input}
               leftIconContainerStyle={styles.icon}
               keyboardType="visible-password"
@@ -223,13 +234,6 @@ const Signup = () => {
                   color="black"
                 />
               )}
-              rightIcon={showStrongPasswordHint ? (
-                <Icon2
-                  name="info"
-                  size={20}
-                  color="blue"
-                />
-              ) : null}
             />
           </View>
         </View>
