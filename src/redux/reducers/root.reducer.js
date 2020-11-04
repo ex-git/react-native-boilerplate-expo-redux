@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import navigator from './navigator';
+import user from '../user/reducer';
 
 export default combineReducers({
   navigator,
+  user,
 });

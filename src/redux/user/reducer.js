@@ -1,20 +1,17 @@
 const initState = {
-  screen: 'home',
+  locale: 'en',
 };
 
 export default (state = initState, action) => {
   switch (action.type) {
-    case 'CHANGE_SCREEN': {
+    case 'UPDATE_LOCALE': {
       return {
         ...state,
-        screen: action.payload,
+        locale: action.payload,
       };
     }
-    case 'ALERT_FUNCTION2': {
-      return {
-        ...state,
-        alert2: action.payload,
-      };
+    case 'LOG_OUT': {
+      return {};
     }
     default:
       return state;

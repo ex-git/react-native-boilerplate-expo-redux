@@ -1,0 +1,13 @@
+{
+    "screenName": {
+        "home": "home_en",
+        "createAccount": "createAccount_en"
+    },
+    "homeScreen": {
+        "pleaseSelectLanguage": "Please select language",
+        "welcome": "Welcome",
+        "createAccount": "Create Account",
+        "logIn": "Log In",
+        "signUp": "Sign Up"
+    }
+}

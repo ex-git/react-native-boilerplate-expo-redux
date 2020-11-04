@@ -1,5 +1,7 @@
+export { default as i18n, setLocale } from './i18n';
+
 // return trimmed string or null, can also return other if empty is set
-export const stringFormatter = (str, empty = null) => {
+export const stringTrimer = (str, empty = null) => {
   // only work on string
   if (typeof str === 'string' || str instanceof String) {
     if (str.trim() !== '') {

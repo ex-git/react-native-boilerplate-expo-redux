@@ -9,10 +9,9 @@ import {
 } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/Feather';
-import { stringFormatter } from '../../components/utils';
+import { trimString } from '../../utils';
 import { LanguagesPicker } from '../../components/molecules';
 // import { function1 } from '../../redux/actions';
-
 
 const styles = StyleSheet.create({
   container: {
@@ -99,16 +98,16 @@ const Signup = () => {
       let strongPassword = false;
       if (text === '') {
         msg = "Password can't be empty";
-      } else if (!stringFormatter(text) || text.includes(' ')) {
+      } else if (!trimString(text) || text.includes(' ')) {
         msg = "Password can't include space";
-      } else if (!stringFormatter(text) || stringFormatter(text).length < 6) {
+      } else if (!trimString(text) || trimString(text).length < 6) {
         msg = 'Minimum 6 digits';
       }
-      if ((stringFormatter(text) && (stringFormatter(text).length < 8))
-        || (stringFormatter(text) && !/\d+/.test(stringFormatter(text)))
-        || (stringFormatter(text) && !/[A-Z]+/.test(stringFormatter(text)))
-        || (stringFormatter(text) && !/[a-z]+/.test(stringFormatter(text)))
-        || (stringFormatter(text) && !/[#?!@$%^&*-]+/.test(stringFormatter(text)))) {
+      if ((trimString(text) && (trimString(text).length < 8))
+        || (trimString(text) && !/\d+/.test(trimString(text)))
+        || (trimString(text) && !/[A-Z]+/.test(trimString(text)))
+        || (trimString(text) && !/[a-z]+/.test(trimString(text)))
+        || (trimString(text) && !/[#?!@$%^&*-]+/.test(trimString(text)))) {
         setShowStrongPasswordHint(true);
       } else {
         strongPassword = true;
@@ -251,6 +250,5 @@ const Signup = () => {
     </View>
   );
 };
-
 
 export default Signup;

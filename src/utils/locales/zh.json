@@ -1,0 +1,13 @@
+{
+    "screenName": {
+        "home": "home_zh",
+        "createAccount": "createAccount_zh"
+    },
+    "homeScreen": {
+        "pleaseSelectLanguage": "请选择语言",
+        "welcome": "欢迎",
+        "createAccount": "创建账号",
+        "logIn": "登陆",
+        "signUp": "注册"
+    }
+}
