@@ -1,8 +1,4 @@
 {
-    "screenName": {
-        "home": "home_en",
-        "createAccount": "createAccount_en"
-    },
     "homeScreen": {
         "pleaseSelectLanguage": "Please select language",
         "welcome": "Welcome",

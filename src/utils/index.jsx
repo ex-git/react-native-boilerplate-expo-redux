@@ -1,4 +1,4 @@
-export { default as i18n, setLocale } from './i18n';
+export { default as i18n, setLocale, LocalizationContext } from './i18n';
 
 // return trimmed string or null, can also return other if empty is set
 export const stringTrimer = (str, empty = null) => {
