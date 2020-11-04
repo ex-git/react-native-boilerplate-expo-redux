@@ -5,7 +5,6 @@ import {
 import { useDispatch } from 'react-redux';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { LocalizationContext } from '../../utils';
-import { updateLocale } from '../../redux/user/action';
 // import { StyleSheet, Text, View } from 'react-native';
 // import { Input, Button } from '../../components/atoms';
 
