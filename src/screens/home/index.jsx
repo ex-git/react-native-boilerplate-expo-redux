@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useActionSheet } from '@expo/react-native-action-sheet';
+import { useTheme } from '@react-navigation/native';
 import { LocalizationContext } from '../../utils';
 // import { StyleSheet, Text, View } from 'react-native';
 // import { Input, Button } from '../../components/atoms';
@@ -31,6 +32,7 @@ const styles = StyleSheet.create({
 });
 const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch();
+  const { colors } = useTheme();
   const { t, locale, setLocale } = React.useContext(LocalizationContext);
   const [value, onChangeText] = React.useState('Useless Placeholder');
   // const [userLocale, setUserLocale] = React.useState('en');
@@ -61,9 +63,9 @@ const HomeScreen = ({ navigation }) => {
     });
   }, [navigation, locale]);
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.intro}>
-        <Text onPress={() => openActionSheet()}>
+        <Text onPress={() => openActionSheet()} style={{ color: colors.text }}>
           Testing1
         </Text>
         {/* <Input

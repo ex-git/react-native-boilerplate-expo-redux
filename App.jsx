@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { enableScreens } from 'react-native-screens';
+import { AppearanceProvider } from 'react-native-appearance';
 // import { AppLoading } from 'expo';
 // import { Asset } from 'expo-asset';
 // import { useFonts } from 'expo-font';
@@ -43,11 +44,13 @@ const App = ({ props }) => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <LocalizationContext.Provider value={localizationContext}>
-          <ActionSheetProvider>
-            <Router />
-          </ActionSheetProvider>
-        </LocalizationContext.Provider>
+        <AppearanceProvider>
+          <LocalizationContext.Provider value={localizationContext}>
+            <ActionSheetProvider>
+              <Router />
+            </ActionSheetProvider>
+          </LocalizationContext.Provider>
+        </AppearanceProvider>
       </PersistGate>
     </Provider>
   );
