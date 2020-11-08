@@ -1,13 +1,13 @@
 const initState = {
-  locale: 'en',
+  isLoggedIn: false,
 };
 
 export default (state = initState, action) => {
   switch (action.type) {
-    case 'UPDATE_LOCALE': {
+    case 'UPDATE_LOGIN_STATUS': {
       return {
         ...state,
-        locale: action.payload,
+        isLoggedIn: action.payload,
       };
     }
     case 'LOG_OUT': {

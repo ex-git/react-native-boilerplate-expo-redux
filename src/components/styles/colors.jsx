@@ -14,7 +14,6 @@ const GRAY_MEDIUM = '#cacaca';
 const GRAY_DARK = '#8a8a8a';
 
 const tintColor = '#2f95dc';
-
 export default {
   PRIMARY,
   SECONDARY,
@@ -26,4 +25,13 @@ export default {
   GRAY_LIGHT,
   GRAY_MEDIUM,
   GRAY_DARK,
+  tabIconDefault: '#ccc',
+  tabIconSelected: tintColor,
+  tabBar: '#fefefe',
+  errorBackground: 'red',
+  errorText: '#fff',
+  warningBackground: '#EAEB5E',
+  warningText: '#666804',
+  noticeBackground: tintColor,
+  noticeText: '#fff',
 };

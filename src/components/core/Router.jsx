@@ -1,24 +1,24 @@
 import React, {
-  useState, useEffect, useContext, useRef,
+  useContext, useRef,
 } from 'react';
-import { useSelector } from 'react-redux';
-
 import {
   NavigationContainer,
   DefaultTheme,
   DarkTheme,
 } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useColorScheme } from 'react-native-appearance';
 import { LocalizationContext } from '../../utils';
 import HomeScreen from '../../screens/home';
 // import Login from '../../screens/login';
 import Signup from '../../screens/signup';
+import UserNavigator from './UserNavigator';
 
 const Stack = createStackNavigator();
 const Router = () => {
-  const isLoggedIn = true;
-  const { t, locale, setLocale } = useContext(LocalizationContext);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const { t } = useContext(LocalizationContext);
 
   const colorScheme = useColorScheme();
   const routeNameRef = useRef();
@@ -55,35 +55,30 @@ const Router = () => {
       }}
       theme={theme}
     >
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: theme.backgroundColor,
-          },
-          headerTintColor: theme.text,
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        }}
-      >
-        {isLoggedIn ? (
-          <>
-            <Stack.Screen
-              name="home"
-              options={({ route }) => ({ title: t('homeScreen.welcome') })}
-              component={HomeScreen}
-            />
-            {/* <Stack.Screen name="Log in" component={Login} /> */}
-            <Stack.Screen
-              name="createAccount"
-              options={({ route }) => ({ title: t('homeScreen.createAccount') })}
-              component={Signup}
-            />
-          </>
-        ) : (
+      {isLoggedIn ? (
+
+        <UserNavigator />
+      ) : (
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: theme.backgroundColor,
+            },
+            headerTintColor: theme.text,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        >
           <Stack.Screen name="Home" component={HomeScreen} />
-        )}
-      </Stack.Navigator>
+
+          <Stack.Screen
+            name="createAccount"
+            options={({ route }) => ({ title: t('homeScreen.createAccount') })}
+            component={Signup}
+          />
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
   );
 };

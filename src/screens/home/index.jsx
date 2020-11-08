@@ -2,12 +2,13 @@ import React from 'react';
 import {
   View, Text, StyleSheet, Image, Button,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { useTheme } from '@react-navigation/native';
 import { LocalizationContext } from '../../utils';
 // import { StyleSheet, Text, View } from 'react-native';
 // import { Input, Button } from '../../components/atoms';
+import { changeLoginStatus } from '../../redux/user/action';
 
 const styles = StyleSheet.create({
   container: {
@@ -35,7 +36,6 @@ const HomeScreen = ({ navigation }) => {
   const { colors } = useTheme();
   const { t, locale, setLocale } = React.useContext(LocalizationContext);
   const [value, onChangeText] = React.useState('Useless Placeholder');
-  // const [userLocale, setUserLocale] = React.useState('en');
   const { showActionSheetWithOptions } = useActionSheet();
   const openActionSheet = () => {
     const title = t('homeScreen.pleaseSelectLanguage');
@@ -66,7 +66,13 @@ const HomeScreen = ({ navigation }) => {
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.intro}>
         <Text onPress={() => openActionSheet()} style={{ color: colors.text }}>
-          Testing1
+          Language
+        </Text>
+        <Text
+          onPress={() => dispatch(changeLoginStatus({ status: true }))}
+          style={{ color: colors.text }}
+        >
+          Login
         </Text>
         {/* <Input
           onChangeText={(text) => dispatch(function1(text))}
