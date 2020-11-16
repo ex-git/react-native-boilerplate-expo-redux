@@ -1,9 +1,17 @@
 {
     "homeScreen": {
+        "language": "Language",
         "pleaseSelectLanguage": "Please select language",
         "welcome": "Welcome",
         "createAccount": "Create Account",
         "logIn": "Log In",
         "signUp": "Sign Up"
+    },
+    "languages": {
+        "english": "English",
+        "chinese": "Chinese",
+    },
+    "menu": {
+        "cancel": "Cancel",
     }
 }

@@ -41,9 +41,13 @@ const HomeScreen = ({ navigation }) => {
   const { showActionSheetWithOptions } = useActionSheet();
   const openActionSheet = () => {
     const title = t('homeScreen.pleaseSelectLanguage');
-    const options = ['Chinese', 'English', 'Cancel'];
+    const languages = [
+      { en: t('languages.english') },
+      { zh: t('languages.chinese') },
+    ];
+    const options = [...languages.map((lang) => Object.values(lang)[0]), t('menu.cancel')];
     const destructiveButtonIndex = 0;
-    const cancelButtonIndex = 2;
+    const cancelButtonIndex = options.length - 1;
     showActionSheetWithOptions(
       {
         title,
@@ -52,15 +56,17 @@ const HomeScreen = ({ navigation }) => {
         destructiveButtonIndex,
       },
       (buttonIndex) => {
-        setLocale(buttonIndex === 0 ? 'zh' : 'en');
+        if (buttonIndex !== cancelButtonIndex) {
+          setLocale(Object.keys(languages[buttonIndex])[0]);
+        }
       },
     );
   };
   React.useLayoutEffect(() => {
     navigation.setOptions({
       // headerTitle: props => <LogoTitle {...props} />,
-      headerTitle: t('homeScreen.welcome', { locale }),
-      headerRight: () => <Button title="change" onPress={() => navigation.setOptions({ title: 'x!' })} />,
+      headerTitle: t('homeScreen.welcome'),
+      headerRight: () => <Button title={t('homeScreen.language')} onPress={() => openActionSheet()} />,
     });
   }, [navigation, locale]);
 
@@ -72,13 +78,7 @@ const HomeScreen = ({ navigation }) => {
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.intro}>
         <Text onPress={() => openActionSheet()} style={{ color: colors.text }}>
-          Language
-        </Text>
-        <Text
-          onPress={handleLogin}
-          style={{ color: colors.text }}
-        >
-          Login
+          Text
         </Text>
         {/* <Input
           onChangeText={(text) => dispatch(function1(text))}
