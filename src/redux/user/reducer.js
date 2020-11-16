@@ -1,17 +1,23 @@
 const initState = {
-  isLoggedIn: false,
+  token: null,
 };
 
 export default (state = initState, action) => {
   switch (action.type) {
-    case 'UPDATE_LOGIN_STATUS': {
+    case 'LOGIN_SUCCESS': {
       return {
         ...state,
-        isLoggedIn: action.payload,
+        token: action.token,
+      };
+    }
+    case 'LOGIN_ERROR': {
+      return {
+        ...state,
+        token: null,
       };
     }
     case 'LOG_OUT': {
-      return {};
+      return initState;
     }
     default:
       return state;

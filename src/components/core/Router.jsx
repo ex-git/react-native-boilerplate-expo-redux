@@ -17,7 +17,7 @@ import UserNavigator from './UserNavigator';
 
 const Stack = createStackNavigator();
 const Router = () => {
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const token = useSelector((state) => state.user.token);
   const { t } = useContext(LocalizationContext);
 
   const colorScheme = useColorScheme();
@@ -55,7 +55,7 @@ const Router = () => {
       }}
       theme={theme}
     >
-      {isLoggedIn ? (
+      {token ? (
 
         <UserNavigator />
       ) : (

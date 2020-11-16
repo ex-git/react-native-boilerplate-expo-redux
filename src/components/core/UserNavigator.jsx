@@ -64,8 +64,8 @@ const UserNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-        //   backgroundColor: colors.background,
-        //   shadowColor: 'transparent',
+          //   backgroundColor: colors.background,
+          //   shadowColor: 'transparent',
         },
         headerTintColor: colors.text,
         headerTitleStyle: {

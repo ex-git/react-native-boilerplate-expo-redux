@@ -1,10 +1,12 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+// import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import { persistStore, persistReducer } from 'redux-persist';
-import { AsyncStorage } from 'react-native'; // An asynchronous, unencrypted, persistent, key-value storage system for React Native.
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // import someOtherReduxMiddleware from 'some-other-redux-middleware';
 import rootReducer from './reducers/root.reducer';
 import loggerMiddleware from './middleware/logger';
+import rootSaga from '../saga/root.saga';
 
 // Middleware: Redux Persist Config
 const persistConfig = {
@@ -30,10 +32,14 @@ const devToolsExtension = window && window.__REDUX_DEVTOOLS_EXTENSION__;
 if (typeof devToolsExtension === 'function') {
   enhancerList.push(devToolsExtension());
 }
-
-const composedEnhancer = compose(applyMiddleware(thunk, loggerMiddleware), ...enhancerList);
+const sagaMiddleware = createSagaMiddleware();
+// const composedEnhancer = compose(applyMiddleware(thunk, loggerMiddleware), ...enhancerList);
+const composedEnhancer = compose(applyMiddleware(sagaMiddleware), ...enhancerList);
 
 const store = createStore(persistedReducer, composedEnhancer);
+
+// Saga
+sagaMiddleware.run(rootSaga);
 
 // Middleware: Redux Persist Persister
 const persistor = persistStore(store);

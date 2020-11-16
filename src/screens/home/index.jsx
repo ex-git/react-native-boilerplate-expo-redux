@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   View, Text, StyleSheet, Image, Button,
 } from 'react-native';
@@ -8,7 +8,7 @@ import { useTheme } from '@react-navigation/native';
 import { LocalizationContext } from '../../utils';
 // import { StyleSheet, Text, View } from 'react-native';
 // import { Input, Button } from '../../components/atoms';
-import { changeLoginStatus } from '../../redux/user/action';
+import { loginRequest } from '../../redux/user/action';
 
 const styles = StyleSheet.create({
   container: {
@@ -36,6 +36,8 @@ const HomeScreen = ({ navigation }) => {
   const { colors } = useTheme();
   const { t, locale, setLocale } = React.useContext(LocalizationContext);
   const [value, onChangeText] = React.useState('Useless Placeholder');
+
+  const animation = useRef();
   const { showActionSheetWithOptions } = useActionSheet();
   const openActionSheet = () => {
     const title = t('homeScreen.pleaseSelectLanguage');
@@ -58,10 +60,14 @@ const HomeScreen = ({ navigation }) => {
     navigation.setOptions({
       // headerTitle: props => <LogoTitle {...props} />,
       headerTitle: t('homeScreen.welcome', { locale }),
-      headerRight: () => <Button title="change" onPress={() => navigation.setOptions({ title: 'x!' })} />
-      ,
+      headerRight: () => <Button title="change" onPress={() => navigation.setOptions({ title: 'x!' })} />,
     });
   }, [navigation, locale]);
+
+  const handleLogin = () => {
+    animation.current.play();
+    // dispatch(loginRequest({ user: 'test', password: 'test' }));
+  };
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.intro}>
@@ -69,7 +75,7 @@ const HomeScreen = ({ navigation }) => {
           Language
         </Text>
         <Text
-          onPress={() => dispatch(changeLoginStatus({ status: true }))}
+          onPress={handleLogin}
           style={{ color: colors.text }}
         >
           Login

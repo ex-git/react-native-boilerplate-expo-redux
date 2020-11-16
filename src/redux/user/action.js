@@ -1,7 +1,7 @@
-export const changeLoginStatus = (status) => async (dispatch, getState) => {
-  console.info('status', status);
-  dispatch({
-    type: 'UPDATE_LOGIN_STATUS',
-    payload: status,
-  });
-};
+export const loginRequest = ({ user, password }) => ({ type: 'LOGIN_REQUEST', user, password });
+
+export const loginSuccess = (token) => ({ type: 'LOGIN_SUCCESS', token });
+
+export const loginFailed = () => ({ type: 'LOGIN_ERROR' });
+
+export const logOut = () => ({ type: 'LOG_OUT' });
