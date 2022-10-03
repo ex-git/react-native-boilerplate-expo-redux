@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
-import { enableScreens } from 'react-native-screens';
+// import { enableScreens } from 'react-native-screens';
 // import { AppLoading } from 'expo';
 // import { Asset } from 'expo-asset';
 // import { useFonts } from 'expo-font';
@@ -12,7 +12,8 @@ import { store, persistor } from './src/redux/store';
 // import ProximaNova from './assets/fonts/Proxima-Nova .ttf';
 import { i18n, LocalizationContext } from './src/utils';
 // Before rendering any navigation stack
-enableScreens();
+// no longer needed to add this
+// enableScreens();
 
 const App = ({ props }) => {
   const [locale, setLocale] = useState(i18n.locale);
