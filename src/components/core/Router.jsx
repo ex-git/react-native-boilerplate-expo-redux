@@ -7,17 +7,17 @@ import {
   DarkTheme,
 } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useColorScheme } from 'react-native-appearance';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useColorScheme } from 'react-native';
 import { LocalizationContext } from '../../utils';
 import HomeScreen from '../../screens/home';
 // import Login from '../../screens/login';
 import Signup from '../../screens/signup';
 import UserNavigator from './UserNavigator';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 const Router = () => {
-  const token = useSelector((state) => state.user.token);
+  const token = true || useSelector((state) => state.user.token);
   const { t } = useContext(LocalizationContext);
 
   const colorScheme = useColorScheme();
@@ -43,9 +43,9 @@ const Router = () => {
         const currentRouteName = navigationRef.current.getCurrentRoute().name;
 
         if (previousRouteName !== currentRouteName) {
-        // The line below uses the expo-firebase-analytics tracker
-        // https://docs.expo.io/versions/latest/sdk/firebase-analytics/
-        // Change this line to use another Mobile analytics SDK
+          // The line below uses the expo-firebase-analytics tracker
+          // https://docs.expo.io/versions/latest/sdk/firebase-analytics/
+          // Change this line to use another Mobile analytics SDK
           console.info(currentRouteName);
           // Analytics.setCurrentScreen(currentRouteName);
         }

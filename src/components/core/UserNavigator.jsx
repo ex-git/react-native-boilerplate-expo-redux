@@ -4,18 +4,18 @@ import {
   useTheme,
 } from '@react-navigation/native';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Setting from '../../screens/setting';
 import { TabBarIcon } from '../molecules';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const TabsStack = ({ getImg }) => {
   const { colors } = useTheme();
   return (
     <Tab.Navigator
-      tabBarOptions={{
+      screenOptions={{
         activeTintColor: colors.text,
         inactiveTintColor: colors.text.primary,
       }}
